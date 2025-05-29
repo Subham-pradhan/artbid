@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2 class="text-xl font-bold mb-4">Auction Results</h2>
+  <div class="space-y-4">
+    {% for result in results %}
+      <div class="bg-white p-4 shadow">
+        <h3 class="font-semibold">{{ result.painting.title }}</h3>
+        <p>Final Price: ${{ result.final_price }}</p>
+        <p>Winner: {{ result.winner }}</p>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2 class="text-xl font-bold mb-4">All Paintings</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {% for painting in paintings %}
+      <div class="bg-white shadow-md p-4">
+        <h3 class="font-bold text-lg">{{ painting.title }}</h3>
+        <img src="{{ painting.image.url }}" class="w-full h-48 object-cover my-2">
+
+        <!-- Artist Name -->
+        <p class="text-sm text-gray-700 italic">Artist: {{ painting.artist.user }}</p>
+
+        <p>{{ painting.description }}</p>
+        <p class="text-sm text-gray-500">Starting Price: ${{ painting.starting_price }}</p>
+        <a href="{% url 'place_bid' painting.id %}" class="text-blue-600">Place Bid</a>
+
+        <!-- Predict Button with data-id -->
+        <button data-id="{{ painting.id }}" onclick="predictPrice(this)" class="text-purple-500 mt-2">Predict Price</button>
+      </div>
+    {% endfor %}
+  </div>
+
+  <script>
+    function predictPrice(button) {
+      const id = button.getAttribute('data-id');
+      fetch(`/predict/${id}/`)
+        .then(response => response.json())
+        .then(data => alert("Predicted Final Price: $" + data.predicted_price))
+        .catch(error => alert("Error fetching prediction: " + error));
+    }
+  </script>
+{% endblock %}

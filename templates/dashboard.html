@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2 class="text-xl font-bold mb-4">Recommended for You</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {% for painting in recommended_paintings %}
+      <div class="bg-white shadow-md p-4">
+        <h3 class="font-bold text-lg">{{ painting.title }}</h3>
+        <img src="{{ painting.image.url }}" class="w-full h-48 object-cover my-2">
+        <p class="text-sm text-gray-600 italic">Artist: {{ painting.artist.user }}</p>
+        <p class="text-sm text-gray-500">Style: {{ painting.style }}</p>
+        <a href="{% url 'place_bid' painting.id %}" class="text-blue-600">Place Bid</a>
+      </div>
+    {% empty %}
+      <p>No recommendations yet. Start bidding on paintings to get personalized suggestions!</p>
+    {% endfor %}
+  </div>
+{% endblock %}

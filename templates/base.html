@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ArtBid</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="p-6 bg-gray-100">
+  <nav class="bg-white shadow-md p-4 mb-4 flex justify-between items-center">
+  <!-- Left side: Navigation links -->
+  <div class="flex items-center space-x-4">
+    <a href="{% url 'painting_list' %}" class="text-blue-500">Home</a>
+    <a href="{% url 'upload_painting' %}" class="text-blue-500">Upload</a>
+    <a href="{% url 'auction_results' %}" class="text-blue-500">Results</a>
+    <a href="{% url 'dashboard' %}" class="text-blue-500">recommendations</a>
+  </div>
+
+  <!-- Right side: Authentication -->
+  <div class="flex items-center space-x-4">
+    {% if user.is_authenticated %}
+      <span class="text-gray-700">Welcome, {{ user.username }}</span>
+      <a href="{% url 'logout' %}" class="text-red-500">Logout</a>
+    {% else %}
+      <a href="{% url 'login' %}" class="text-blue-500">Login</a>
+      <a href="{% url 'register' %}" class="text-green-500">Register</a>
+    {% endif %}
+  </div>
+</nav>
+
+  <div class="container mx-auto">
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>
