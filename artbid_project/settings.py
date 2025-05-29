@@ -12,12 +12,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
-import pymysql
-import dj_database_url
-from dotenv import load_dotenv
 
-pymysql.install_as_MySQLdb()
-load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -82,22 +78,15 @@ WSGI_APPLICATION = 'artbid_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'artlib',
-#         'USER': 'root',
-#         'PASSWORD': '1234',
-#         'HOST': 'localhost',  # Or your DB host
-#         'PORT': '3306',       # Default MySQL port
-#     }
-# }
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.getenv("DATABASE_URL"),
-        conn_max_age=600,
-        ssl_require=False
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'artlib',
+        'USER': 'root',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',  # Or your DB host
+        'PORT': '3306',       # Default MySQL port
+    }
 }
 
 
