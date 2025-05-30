@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 import pymysql
 from dotenv import load_dotenv
-
+import dj_database_url
 
 
 pymysql.install_as_MySQLdb()
@@ -83,15 +83,9 @@ WSGI_APPLICATION = 'artbid_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('MYSQL_DATABASE'),
-        'USER': os.getenv('MYSQL_USER'),
-        'PASSWORD': os.getenv('MYSQL_PASSWORD'),
-        'HOST': os.getenv('MYSQL_HOST', 'localhost'),
-        'PORT': os.getenv('MYSQL_PORT', '3306'),
-    }
+    'default': dj_database_url.config(default=os.getenv("DATABASE_URL"), engine='django.db.backends.mysql')
 }
 
 # Password validation
