@@ -85,8 +85,14 @@ WSGI_APPLICATION = 'artbid_project.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 
+# Database settings
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+if not DATABASE_URL:
+    raise Exception("DATABASE_URL is missing from environment")
+
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv("DATABASE_URL"), engine='django.db.backends.mysql')
+    'default': dj_database_url.parse(DATABASE_URL, engine='django.db.backends.mysql')
 }
 
 # Password validation
