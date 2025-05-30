@@ -18,6 +18,7 @@ import dj_database_url
 
 
 pymysql.install_as_MySQLdb()
+
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -85,7 +86,7 @@ WSGI_APPLICATION = 'artbid_project.wsgi.application'
 
 
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv("DATABASE_URL"), engine='django.db.backends.mysql')
+    'default': dj_database_url.config(default=os.getenv("DATABASE_URL"))
 }
 
 # Password validation
