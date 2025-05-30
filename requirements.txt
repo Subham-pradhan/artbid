@@ -4,3 +4,5 @@ dj-database-url==2.3.0
 python-dotenv==1.1.0
 gunicorn==22.0.0
 joblib
+pandas 
+scikit-learn
